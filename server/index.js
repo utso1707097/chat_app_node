@@ -35,25 +35,33 @@ io.on('connect', (socket) => {
     callback();
   });
 
-  socket.on('sendFile', ({ fileName, base64data }) => {
+  // socket.on('sendFile', ({ fileName, base64data }) => {
+  //   const user = getUser(socket.id);
+
+  //   io.to(user.room).emit('file', { user: user.name, fileName, base64data });
+  // });
+
+  // socket.on('fileUploaded', ({ fileName, base64data }) => {
+  //   const user = getUser(socket.id);
+
+  //   io.to(user.room).emit('file', { user: user.name, fileName, base64data });
+  // });
+
+  socket.on('sendMessage', (data, callback) => {
+    // Handle sending message and file logic
     const user = getUser(socket.id);
+    io.to(user.room).emit('message', { user: user.name, text: data.message });
 
-    io.to(user.room).emit('file', { user: user.name, fileName, base64data });
-  });
-
-  socket.on('fileUploaded', ({ fileName, base64data }) => {
-    const user = getUser(socket.id);
-
-    io.to(user.room).emit('file', { user: user.name, fileName, base64data });
-  });
-
-  socket.on('sendMessage', (message, callback) => {
-    const user = getUser(socket.id);
-
-    io.to(user.room).emit('message', { user: user.name, text: message });
+    if (data.file) {
+        // Assuming you have some file handling logic here
+        // You can access the file data from `data.file`
+        console.log(data.file);
+        io.to(user.room).emit('file', { user: user.name, fileName: 'YourFileNameHere', base64data: data.file });
+    }
 
     callback();
-  });
+});
+
 
   socket.on('disconnect', () => {
     const user = removeUser(socket.id);

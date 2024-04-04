@@ -1,27 +1,57 @@
+/* Form container */
 .form {
-    display: flex;
-    border-top: 2px solid #D3D3D3;
-  }
-  
+  display: flex;
+  border-top: 2px solid #D3D3D3;
+}
+
+/* File icon */
+.file-icon {
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  background-image: url('../../../public/file.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+}
+
+/* Container for input and file icon */
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+/* Input field */
+.input {
+  border: none;
+  border-radius: 0;
+  padding: 5%;
+  width: 100%; /* Initially take full width */
+  font-size: 1.2em;
+}
+
+/* Remove focus outline */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+}
+
+/* Send button */
+.sendButton {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #2979FF;
+  padding: 20px;
+  display: inline-block;
+  border: none;
+  width: 20%;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
   .input {
-    border: none;
-    border-radius: 0;
-    padding: 5%;
-    width: 80%;
-    font-size: 1.2em;
+    width: calc(100% - 40px); /* Adjusted width for smaller screens, considering the file icon's width and margin */
   }
-  
-  input:focus, textarea:focus, select:focus{
-    outline: none;
-  }
-  
-  .sendButton {
-    color: #fff !important;
-    text-transform: uppercase;
-    text-decoration: none;
-    background: #2979FF;
-    padding: 20px;
-    display: inline-block;
-    border: none;
-    width: 20%;
-  }
+}
